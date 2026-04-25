@@ -1,1 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+
+/* Global design tokens */
+@theme {
+    /* Simple brand colors */
+    --color-primary: #0f0f0f;      /* deep charcoal */
+    --color-secondary: #96bb7c;
+    --color-surface: #f5f7fa;
+
+    /* Text colors */
+    --color-text-dark: #2d3748;
+    --color-text-gray: #667085;
+    --color-text-white: #FFFFFF;
+    --color-text-theme: #f59e0b;   /* amber-500 */
+
+    /* Backgrounds */
+    --color-page-bg: #0f0f0f;      /* deep charcoal */
+
+    /* Typography */
+    --font-primary: 'Montserrat',  'Segoe UI', system-ui, sans-serif, 'Roboto';
+    --font-heading: 'Montserrat', serif, 'Roboto';
+
+    /* Spacing */
+    --section-padding: 80px 0;
+    --container-max-width: 90rem;
+    --grid-gap: 30px;
+    --border-radius: 12px;
+    --button-radius: 5px;
+
+}
+
+body {
+  overflow-y: scroll;
+}
