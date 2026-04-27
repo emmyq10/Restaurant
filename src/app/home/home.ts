@@ -1,17 +1,20 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home',
-  imports: [ CommonModule],
+  imports: [ CommonModule ],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
 export class Home implements OnInit, OnDestroy {
+
+  constructor(private ngZone: NgZone) {}
+
   slides = [
-    { image: 'assets/imgs/hero1.jpg' },
-    { image: 'assets/imgs/hero2.jpg' },
-    { image: 'assets/imgs/hero3.jpg' }
+    { image: 'imgs/hero1.jpg' },
+    { image: 'imgs/hero2.jpg' },
+    { image: 'imgs/hero3.jpg' }
   ];
 
   currentIndex = 0;
@@ -27,16 +30,31 @@ export class Home implements OnInit, OnDestroy {
 
   startAutoSlide() {
     this.intervalId = setInterval(() => {
-      this.nextSlide();
+      this.ngZone.run(() => {
+        this.nextSlide();
+      });
     }, 5000); // 5 seconds
   }
 
   nextSlide() {
+    console.log('Sliding...', this.currentIndex);
     this.currentIndex = (this.currentIndex + 1) % this.slides.length;
   }
 
   prevSlide() {
     this.currentIndex =
       (this.currentIndex - 1 + this.slides.length) % this.slides.length;
+  }
+
+  // This is the nav bar Ts file
+
+  isMobileMenuOpen = false;
+
+  toggleMobileMenu() {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
+
+  closeMobileMenu() {
+    this.isMobileMenuOpen = false;
   }
 }

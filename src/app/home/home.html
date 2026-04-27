@@ -1,40 +1,78 @@
-<header class="bg-white shadow-sm">
-  <nav class="max-w-5xl mx-auto flex items-center justify-between p-4">
-    <div>
-      <h1 class="text-lg font-bold">Restaurant Menu</h1>
-      <p class="text-sm text-gray-500">Habib Dev.</p>
-    </div>
-    <img 
-      src="https://yt3.ggpht.com/a-/AOh14GjThP6xpdHXuwV9tVt7wMvBIytCfvZm4N_BkN1MrA=s288-c-k-c0xffffffff-no-rj-mo"
-      class="w-10 h-10 rounded-full object-cover"
-      alt="profile"
-    />
-  </nav>
-</header>
-
 <section class="relative h-screen w-full overflow-hidden">
+
+  <header class="fixed dark:bg-slate-950 top-0 inset-x-0 w-full z-50 shadow">
+    <div class="mx-auto flex items-center justify-between p-4 max-w-7xl">
+      <!-- Logo -->
+      <div class="flex items-center gap-4">
+        <h2 class="m-0 text-[0.9rem] text-text-white">
+          Restaurant App
+        </h2>
+      </div>
+
+      <!-- Desktop nav -->
+      <nav class="hidden md:block">
+        <ul class="flex list-none gap-8">
+          <li>
+            <a routerLink="/"
+              class="no-underline text-text-white text-base font-medium transition-colors hover:text-text-gray cursor-pointer">
+              Home
+            </a>
+          </li>
+          <li>
+            <a routerLink="/about"
+              class="no-underline text-text-white text-base font-medium transition-colors hover:text-text-gray cursor-pointer">
+              Menu
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Mobile hamburger button -->
+      <button type="button"
+        class="md:hidden inline-flex items-center justify-center rounded-full p-2 text-text-dark hover:bg-white/10 focus:outline-none"
+        (click)="toggleMobileMenu()" aria-label="Toggle navigation">
+        <svg class="h-10 w-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+          stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+
+    </div>
+
+    <!-- Mobile menu -->
+    <div class="md:hidden bg-primary border-t border-white/10" *ngIf="isMobileMenuOpen">
+      <nav class="max-w-7xl mx-auto px-4 pb-4">
+        <ul class="flex flex-col gap-3 pt-3">
+          <li>
+            <a routerLink="/" (click)="closeMobileMenu()"
+              class="block no-underline text-text-gray text-base font-medium transition-colors hover:text-text-gray">
+              Home
+            </a>
+          </li>
+          <li>
+            <a routerLink="/about" (click)="closeMobileMenu()"
+              class="block no-underline text-text-gray text-base font-medium transition-colors hover:text-text-gray">
+              About Us
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
   <!-- SLIDES -->
   <div class="absolute inset-0">
-    <div 
-      *ngFor="let slide of slides; let i = index"
-      class="absolute inset-0 transition-opacity duration-700"
-      [class.opacity-100]="currentIndex === i"
-      [class.opacity-0]="currentIndex !== i"
-    >
-      <img 
-        [src]="slide.image" 
-        class="w-full h-full object-cover"
-        alt="hero image"
-      />
+    <div *ngFor="let slide of slides; let i = index" class="absolute inset-0 transition-opacity duration-700"
+      [class.opacity-100]="currentIndex === i" [class.opacity-0]="currentIndex !== i">
+      <img [src]="slide.image" class="w-full h-full object-cover" alt="hero image" />
 
       <!-- DARK OVERLAY -->
-      <div class="absolute inset-0 bg-black/60"></div>
+      <div class="absolute inset-0 bg-black/50"></div>
     </div>
   </div>
 
   <!-- CONTENT -->
-  <div class="relative z-10 flex flex-col bg-primary justify-center items-center text-center h-full px-4">
+  <div class="relative z-10 flex flex-col justify-center items-center text-center h-full px-4">
 
     <p class="text-sm text-gray-300 italic mb-3">
       Exclusive drink service
@@ -44,34 +82,26 @@
       Cocktail stage evenings
     </h1>
 
-    <button class="border border-white text-white px-6 py-3 text-sm tracking-wide hover:bg-white hover:text-black transition">
+    <button
+      class="border border-white text-white px-6 py-3 text-sm tracking-wide hover:bg-white hover:text-black transition cursor-pointer">
       ↓ View Menu
     </button>
 
   </div>
 
   <!-- NAV ARROWS -->
-  <button 
-    (click)="prevSlide()"
-    class="absolute left-4 top-1/2 -translate-y-1/2 text-white text-2xl z-20"
-  >
+  <button (click)="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 text-white text-2xl z-20">
     ‹
   </button>
 
-  <button 
-    (click)="nextSlide()"
-    class="absolute right-4 top-1/2 -translate-y-1/2 text-white text-2xl z-20"
-  >
+  <button (click)="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 text-white text-2xl z-20">
     ›
   </button>
 
   <!-- DOT INDICATORS -->
   <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-20">
-    <span 
-      *ngFor="let slide of slides; let i = index"
-      class="w-2 h-2 rounded-full bg-white/50"
-      [class.bg-white]="currentIndex === i"
-    ></span>
+    <span *ngFor="let slide of slides; let i = index" class="w-2 h-2 rounded-full bg-white/50"
+      [class.bg-white]="currentIndex === i"></span>
   </div>
 
 </section>
@@ -80,11 +110,8 @@
 
   <!-- SEARCH -->
   <section class="max-w-5xl mx-auto p-4">
-    <input 
-      type="text" 
-      placeholder="Search food..."
-      class="w-full p-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-black"
-    />
+    <input type="text" placeholder="Search food..."
+      class="w-full p-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-black" />
   </section>
 
 
@@ -96,22 +123,18 @@
     </div>
 
     <div class="flex gap-4 overflow-x-auto">
-      
+
       <article class="min-w-[250px] bg-white rounded-xl p-3">
-        <img 
-          src="https://images.pexels.com/photos/315755/pexels-photo-315755.jpeg"
-          class="w-full h-40 object-cover rounded-lg mb-2"
-        />
+        <img src="https://images.pexels.com/photos/315755/pexels-photo-315755.jpeg"
+          class="w-full h-40 object-cover rounded-lg mb-2" />
         <h3 class="font-semibold">Jollof Rice</h3>
         <p class="text-sm text-gray-500">Delicious local rice</p>
         <div class="text-yellow-400 text-sm mt-1">★★★★☆</div>
       </article>
 
       <article class="min-w-[250px] bg-white rounded-xl p-3">
-        <img 
-          src="https://images.pexels.com/photos/793759/pexels-photo-793759.jpeg"
-          class="w-full h-40 object-cover rounded-lg mb-2"
-        />
+        <img src="https://images.pexels.com/photos/793759/pexels-photo-793759.jpeg"
+          class="w-full h-40 object-cover rounded-lg mb-2" />
         <h3 class="font-semibold">Fried Rice</h3>
         <p class="text-sm text-gray-500">Tasty and spicy</p>
         <div class="text-yellow-400 text-sm mt-1">★★★★☆</div>
@@ -157,10 +180,8 @@
     <div class="flex gap-4 overflow-x-auto">
 
       <article class="min-w-[250px] bg-white rounded-xl p-3">
-        <img 
-          src="https://images.pexels.com/photos/109275/pexels-photo-109275.jpeg"
-          class="w-full h-40 object-cover rounded-lg mb-2"
-        />
+        <img src="https://images.pexels.com/photos/109275/pexels-photo-109275.jpeg"
+          class="w-full h-40 object-cover rounded-lg mb-2" />
         <h3 class="font-semibold">Fresh Juice</h3>
         <p class="text-sm text-gray-500">Healthy drink</p>
         <div class="text-yellow-400 text-sm mt-1">★★★★★</div>
