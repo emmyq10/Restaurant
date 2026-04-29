@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
+  standalone: true,
   imports: [ CommonModule, RouterModule ],
   templateUrl: './menu.html',
   styleUrl: './menu.css',

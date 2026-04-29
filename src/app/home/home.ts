@@ -1,9 +1,11 @@
 import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { Subscription, timer } from 'rxjs';
 
 @Component({
   selector: 'app-home',
+  standalone: true,
   imports: [ CommonModule, RouterModule ],
   templateUrl: './home.html',
   styleUrl: './home.css',
@@ -11,6 +13,7 @@ import { RouterModule } from '@angular/router';
 export class Home implements OnInit, OnDestroy {
 
   constructor(private ngZone: NgZone) {}
+  private timerSubscription?: Subscription
 
   slides = [
     { image: 'imgs/hero1.jpg' },
@@ -19,22 +22,24 @@ export class Home implements OnInit, OnDestroy {
   ];
 
   currentIndex = 0;
-  intervalId: any;
+  intervalId!: ReturnType <typeof setInterval>;
 
   ngOnInit() {
-    this.startAutoSlide();
+   this.startAutoSlide();
   }
 
   ngOnDestroy() {
     clearInterval(this.intervalId);
+    this.timerSubscription?.unsubscribe();
   }
 
   startAutoSlide() {
-    this.intervalId = setInterval(() => {
-      this.ngZone.run(() => {
-        this.nextSlide();
-      });
-    }, 5000); // 5 seconds
+    this.timerSubscription = timer(5000,5000).subscribe(() =>{
+      this.slides[this.currentIndex]
+      this.slides.forEach(i => i.image);
+      console.log(this.slides[this.currentIndex])
+    })
+   
   }
 
   nextSlide() {
