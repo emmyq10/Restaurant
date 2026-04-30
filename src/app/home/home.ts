@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
+import { Component, OnInit, OnDestroy, signal, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Subscription, timer } from 'rxjs';
@@ -12,44 +12,42 @@ import { Subscription, timer } from 'rxjs';
 })
 export class Home implements OnInit, OnDestroy {
 
-  constructor(private ngZone: NgZone) {}
+  
+  slides = input<string[]>(['imgs/hero1.jpg', 'imgs/hero2.jpg', 'imgs/hero3.jpg']);
   private timerSubscription?: Subscription
+  currentIndex = signal<number>(0);
 
-  slides = [
-    { image: 'imgs/hero1.jpg' },
-    { image: 'imgs/hero2.jpg' },
-    { image: 'imgs/hero3.jpg' }
-  ];
 
-  currentIndex = 0;
-  intervalId!: ReturnType <typeof setInterval>;
 
   ngOnInit() {
-   this.startAutoSlide();
+    this.startAutoSlide();
   }
 
   ngOnDestroy() {
-    clearInterval(this.intervalId);
     this.timerSubscription?.unsubscribe();
   }
 
   startAutoSlide() {
-    this.timerSubscription = timer(5000,5000).subscribe(() =>{
-      this.slides[this.currentIndex]
-      this.slides.forEach(i => i.image);
-      console.log(this.slides[this.currentIndex])
+    this.timerSubscription = timer(3000,3000).subscribe(() =>{
+      this.nextSlide();
     })
    
   }
 
   nextSlide() {
-    console.log('Sliding...', this.currentIndex);
-    this.currentIndex = (this.currentIndex + 1) % this.slides.length;
+    const currentIndex = (this.currentIndex() + 1) % this.slides().length;
+    this.currentIndex.set(currentIndex);
   }
 
   prevSlide() {
-    this.currentIndex =
-      (this.currentIndex - 1 + this.slides.length) % this.slides.length;
+    const currentIndex = (this.currentIndex() - 1 + this.slides().length) % this.slides().length;
+    this.currentIndex.set(currentIndex);
+    this.resetSlides();
+  }
+
+  resetSlides(): void {
+    this.timerSubscription?.unsubscribe();
+    this.startAutoSlide();
   }
 
   // This is the nav bar Ts file

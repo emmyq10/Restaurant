@@ -24,12 +24,18 @@
               Menu
             </a>
           </li>
+          <li>
+            <a routerLink="/contact"
+              class="no-underline text-text-white text-base font-medium transition-colors hover:text-text-gray cursor-pointer">
+              Contact Us
+            </a>
+          </li>
         </ul>
       </nav>
 
       <!-- Mobile hamburger button -->
       <button type="button"
-        class="md:hidden inline-flex items-center justify-center rounded-full p-2 text-text-dark hover:bg-white/10 focus:outline-none"
+        class="md:hidden inline-flex items-center justify-center rounded-full p-2 text-text-white hover:bg-white/10 focus:outline-none"
         (click)="toggleMobileMenu()" aria-label="Toggle navigation">
         <svg class="h-10 w-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
           stroke-width="2">
@@ -55,17 +61,21 @@
               Menu
             </a>
           </li>
+          <li>
+            <a routerLink="/contact" (click)="closeMobileMenu()"
+              class="block no-underline text-text-gray text-base font-medium transition-colors hover:text-text-gray">
+              Contact Us
+            </a>
+          </li>
         </ul>
       </nav>
     </div>
   </header>
 
   <!-- SLIDES -->
-  <div class="absolute inset-0">
-    
-    <div *ngFor="let slide of slides; let i = index" class="absolute inset-0 transition-opacity duration-700"
-      [class.opacity-100]="currentIndex === i" [class.opacity-0]="currentIndex !== i">
-      <img [src]="slide.image" class="w-full h-full object-cover" alt="hero image" />
+  <div class="absolute inset-0">    
+      <div  class="absolute inset-0 transition-opacity duration-700">
+      <img [src]="slides()[currentIndex()]" class="w-full h-full object-cover" alt="hero image" />
 
       <!-- DARK OVERLAY -->
       <div class="absolute inset-0 bg-black/50"></div>
@@ -91,18 +101,23 @@
   </div>
 
   <!-- NAV ARROWS -->
-  <button (click)="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 text-white text-2xl z-20">
+  <!-- <button (click)="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 text-white text-2xl z-20">
     ‹
   </button>
 
   <button (click)="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 text-white text-2xl z-20">
     ›
-  </button>
+  </button> -->
 
   <!-- DOT INDICATORS -->
   <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-20">
-    <span *ngFor="let slide of slides; let i = index" class="w-2 h-2 rounded-full bg-white/50"
-      [class.bg-white]="currentIndex === i"></span>
+    @for (img of slides(); track $index) {
+      <span
+      class="w-2 h-2 rounded-full bg-white/50"
+      [class.bg-white]="$index === currentIndex()"
+      (click)="currentIndex.set($index); resetSlides()"
+      ></span>
+    }
   </div>
 
 </section>
