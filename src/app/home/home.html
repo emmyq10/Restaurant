@@ -25,6 +25,12 @@
             </a>
           </li>
           <li>
+            <a routerLink="/reservation"
+              class="no-underline text-text-white text-base font-medium transition-colors hover:text-text-gray cursor-pointer">
+              Reservation
+            </a>
+          </li>
+          <li>
             <a routerLink="/contact"
               class="no-underline text-text-white text-base font-medium transition-colors hover:text-text-gray cursor-pointer">
               Contact Us
@@ -62,6 +68,12 @@
             </a>
           </li>
           <li>
+            <a routerLink="/reservation" (click)="closeMobileMenu()"
+              class="block no-underline text-text-gray text-base font-medium transition-colors hover:text-text-gray">
+              Reservation
+            </a>
+          </li>
+          <li>
             <a routerLink="/contact" (click)="closeMobileMenu()"
               class="block no-underline text-text-gray text-base font-medium transition-colors hover:text-text-gray">
               Contact Us
@@ -73,8 +85,8 @@
   </header>
 
   <!-- SLIDES -->
-  <div class="absolute inset-0">    
-      <div  class="absolute inset-0 transition-opacity duration-700">
+  <div class="absolute inset-0">
+    <div class="absolute inset-0 transition-opacity duration-700">
       <img [src]="slides()[currentIndex()]" class="w-full h-full object-cover" alt="hero image" />
 
       <!-- DARK OVERLAY -->
@@ -112,11 +124,8 @@
   <!-- DOT INDICATORS -->
   <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-20">
     @for (img of slides(); track $index) {
-      <span
-      class="w-2 h-2 rounded-full bg-white/50"
-      [class.bg-white]="$index === currentIndex()"
-      (click)="currentIndex.set($index); resetSlides()"
-      ></span>
+    <span class="w-2 h-2 rounded-full bg-white/50" [class.bg-white]="$index === currentIndex()"
+      (click)="currentIndex.set($index); resetSlides()"></span>
     }
   </div>
 

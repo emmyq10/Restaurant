@@ -1,0 +1,72 @@
+<section class="relative min-h-screen w-full">
+
+    <!-- BACKGROUND IMAGE -->
+    <div class="absolute inset-0">
+        <img src="imgs/hero1.jpg" class="w-full h-full object-cover" alt="reservation background" />
+
+        <!-- DARK OVERLAY -->
+        <div class="absolute inset-0 bg-black/70"></div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="relative z-10 flex flex-col items-center justify-center text-center min-h-screen px-4">
+
+        <!-- TITLE -->
+        <h1 class="text-white text-3xl sm:text-5xl md:text-6xl font-serif mb-8">
+            Reservations
+        </h1>
+
+        <!-- FORM CONTAINER -->
+        <form (ngSubmit)="makeReservation()" class="w-full max-w-5xl grid grid-cols-1 md:grid-cols-4 gap-4">
+
+            <!-- GUESTS -->
+            <div class="border border-white/40 p-3 flex items-center gap-2 text-white">
+                <span>👤</span>
+                <select [(ngModel)]="form.guests" name="guests" class="bg-transparent w-full outline-none">
+
+                    <option value="1">1 Person</option>
+                    <option value="2">2 People</option>
+                    <option value="3">3 People</option>
+                    <option value="4">4 People</option>
+                </select>
+            </div>
+
+            <!-- DATE -->
+            <div class="border border-white/40 p-3 flex items-center gap-2 text-white">
+                <span>📅</span>
+                <input type="name" [(ngModel)]="form.name" name="date" class="bg-transparent w-full outline-none" />
+            </div>
+
+            <div class="border border-white/40 p-3 flex items-center gap-2 text-white">
+                <span>📅</span>
+                <input type="number" [(ngModel)]="form.phone" name="date" class="bg-transparent w-full outline-none" />
+            </div>
+
+            <div class="border border-white/40 p-3 flex items-center gap-2 text-white">
+                <span>📅</span>
+                <input type="date" [(ngModel)]="form.date" name="date" class="bg-transparent w-full outline-none" />
+            </div>
+
+            <!-- TIME -->
+            <div class="border border-white/40 p-3 flex items-center gap-2 text-white">
+                <span>⏰</span>
+                <input type="time" [(ngModel)]="form.time" name="time" class="bg-transparent w-full outline-none" />
+            </div>
+
+            <!-- BUTTON -->
+            <button type="submit"
+                class="border border-white text-white px-6 py-3 hover:bg-white hover:text-black transition">
+
+                Book a Table
+            </button>
+
+        </form>
+
+        <!-- SMALL TEXT -->
+        <p class="text-gray-400 text-xs mt-3">
+            Powered by your system 😉
+        </p>
+
+    </div>
+
+</section>
