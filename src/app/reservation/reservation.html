@@ -31,17 +31,19 @@
                 </select>
             </div>
 
+            <!-- NAME -->
+            <div class="border border-white/40 p-3 flex items-center gap-2 text-white">
+                <span>👤</span>
+                <input type="text" [(ngModel)]="form.name" name="name" class="bg-transparent w-full outline-none" />
+            </div>
+
+            <!-- PHONE -->
+            <div class="border border-white/40 p-3 flex items-center gap-2 text-white">
+                <span>�</span>
+                <input type="number" [(ngModel)]="form.phone" name="phone" class="bg-transparent w-full outline-none" />
+            </div>
+
             <!-- DATE -->
-            <div class="border border-white/40 p-3 flex items-center gap-2 text-white">
-                <span>📅</span>
-                <input type="name" [(ngModel)]="form.name" name="date" class="bg-transparent w-full outline-none" />
-            </div>
-
-            <div class="border border-white/40 p-3 flex items-center gap-2 text-white">
-                <span>📅</span>
-                <input type="number" [(ngModel)]="form.phone" name="date" class="bg-transparent w-full outline-none" />
-            </div>
-
             <div class="border border-white/40 p-3 flex items-center gap-2 text-white">
                 <span>📅</span>
                 <input type="date" [(ngModel)]="form.date" name="date" class="bg-transparent w-full outline-none" />
