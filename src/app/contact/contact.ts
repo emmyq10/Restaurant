@@ -4,20 +4,19 @@ import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-contact',
-  imports: [ CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './contact.html',
   styleUrl: './contact.css',
 })
 export class Contact {
-
   openWhatsApp() {
-  const phone = '2348012345678'; // Replace with your number
+    const phone = '2347068815061'; // Replace with your number
 
-  const message = 'Hello, I would like to make an inquiry about your menu.';
-  const encodedMessage = encodeURIComponent(message);
+    const message = 'Hello, I would like to make an inquiry about your menu.';
+    const encodedMessage = encodeURIComponent(message);
 
-  const url = `https://wa.me/${phone}?text=${encodedMessage}`;
+    const url = `https://wa.me/${phone}?text=${encodedMessage}`;
 
-  window.open(url, '_blank');
-}
+    window.open(url, '_blank');
+  }
 }
